@@ -6,8 +6,8 @@
 #include <WiFiUdp.h>
 
 #define PUSH_BUTTON         0           // Encoder pushbutton
-#define ENCODER_LEFT        5           // These maybe backwards, need to test
-#define ENDCODE_RIGHT       4           // ^^
+#define ENCODER_LEFT        5           // FIXME: These maybe backwards, need to test
+#define ENDCODE_RIGHT       4           // ^^ 
 #define DATA_PIN            13          // MTCK - maybe the engineers have it backwards, or maybe I do! Logic analyzer will tell
 #define CLOCK_PIN           14          // MTMS - Master Transmit Master Select - this is normally the data output
 #define MTDO                15          // Normally SPI Data Out -> this is connected to LCD pin 12
@@ -17,6 +17,7 @@
 /*
   TODO:
     ADD ENCODER FUNCTIONALITY
+    TEST ENCODER PINS
 */
 void setupOTA() {
   ArduinoOTA.onStart([]() {});
@@ -48,7 +49,7 @@ void pulseGPIO(uint8_t pin, uint8_t length, bool type){
 /**@brief pulses the update pin to load data into the display
  * @param pin gpio to pulse
 */
-void updateDisplay(uint8_t pin){
+void updateDisplay(){
 
 }
 /**@brief sends 16 bits to the 2 shift registers
