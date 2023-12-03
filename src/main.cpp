@@ -11,6 +11,7 @@
 #define MTDI                12          // Normally SPI Data IN  -> this is conencted to LCD pin 14
 #define BIT_ORDER           LSBFIRST    // littleEndian
 
+
 void setupOTA() {
   ArduinoOTA.onStart([]() {});
   ArduinoOTA.onEnd([]() {});
@@ -19,6 +20,31 @@ void setupOTA() {
   ArduinoOTA.begin();
 }
 
+/**@brief pulses a pin for a specific amount of time
+ * @param pin gpio to pulse
+ * @param length number of microseconds to pulse pin
+ * @param type rising pulse of falling
+*/
+void pulseGPIO(uint8_t pin, uint8_t length, bool type){
+  // get pin's current state
+  bool state = digitalRead(pin);
+  // set line opposite of pulse type
+  // might need to add a delay here to let the line settle.
+  digitalWrite(pin,!type);
+  // pulse the pin
+  digitalWrite(pin,type);
+  delayMicroseconds(length);
+  digitalWrite(pin,!type);
+  // return pin to where it was
+  digitalWrite(pin,state);
+}
+
+/**@brief pulses the update pin to load data into the display
+ * @param pin gpio to pulse
+*/
+void updateDisplay(uint8_t pin){
+
+}
 /**@brief sends 16 bits to the 2 shift registers
  * @param data the data to send
 */
@@ -29,6 +55,9 @@ void sendDisplayData(uint16_t data) {
   shiftOut(DATA_PIN, CLOCK_PIN, BIT_ORDER, (data << 8));
   // now the second
   shiftOut(DATA_PIN, CLOCK_PIN, BIT_ORDER, (data));
+
+  // send the data to the display via parallel, maybe pulse MTDO or MTDI?
+  updateDisplay();
 }
 
 void setup() {
