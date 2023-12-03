@@ -1,4 +1,4 @@
-#include "TFT.hpp"
+#include <TFT.h>
 
 TFT::TFT() : Adafruit_GFX(D_WIDTH, D_HEIGHT) {}
 

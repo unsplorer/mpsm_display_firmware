@@ -2,7 +2,7 @@
 #include <DNSServer.h>
 #include <ESP8266WebServer.h>
 #include <ESP8266WiFi.h>
-#include <TFT.hpp>
+#include <TFT.h>
 #include <WiFiManager.h>
 #include <WiFiUdp.h>
 
@@ -21,6 +21,8 @@ void setupOTA() {
 }
 
 void setup() {
+  tft.begin();
+
   // E-Z wifi manager. Wifi will be used for OTA updates.
   WiFiManager wifiManager;
   wifiManager.autoConnect();

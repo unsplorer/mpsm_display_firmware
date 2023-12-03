@@ -5,7 +5,7 @@
 
 #include <Adafruit_GFX.h>
 #include <ESP8266WiFi.h>
-#include <pins.hpp>
+#include <pins.h>
 
 class TFT : public Adafruit_GFX {
 
