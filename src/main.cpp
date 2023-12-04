@@ -27,6 +27,8 @@ void setup() {
   WiFiManager wifiManager;
   wifiManager.autoConnect();
   setupOTA();
+
+  tft.printf("Connected\nSSID:\t%s\nIP:\t%s\n",WiFi.SSID(),WiFi.localIP());
 }
 
 void loop() {
